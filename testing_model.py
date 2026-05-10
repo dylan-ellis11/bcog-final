@@ -9,6 +9,11 @@ def test_preprocessing_normalization():
     # 1. Create a dummy dataset with the exact values from your testing.md
     dummy_train_images = np.array([[[0, 128, 255]]], dtype=np.uint8)
     dummy_train_labels = np.array([1])
+
+    # ADDED: Dummy validation data to satisfy load_and_preprocess_data
+    dummy_val_images = np.array([[[0, 128, 255]]], dtype=np.uint8)
+    dummy_val_labels = np.array([1])
+
     dummy_test_images = np.array([[[0, 128, 255]]], dtype=np.uint8)
     dummy_test_labels = np.array([1])
 
@@ -18,13 +23,19 @@ def test_preprocessing_normalization():
         temp_filepath,
         train_images=dummy_train_images,
         train_labels=dummy_train_labels,
+        val_images=dummy_val_images,  # <--- ADDED
+        val_labels=dummy_val_labels,  # <--- ADDED
         test_images=dummy_test_images,
         test_labels=dummy_test_labels,
     )
 
     try:
         # 3. Pass the filepath to your function
-        X_train, y_train, X_test, y_test = load_and_preprocess_data(temp_filepath)
+        # NOTE: If your function returns validation data too, you will need to
+        # unpack 6 variables here instead of 4 (e.g., X_train, y_train, X_val, y_val, X_test, y_test)
+        X_train, y_train, X_val, y_val, X_test, y_test = load_and_preprocess_data(
+            temp_filepath
+        )
 
         # 4. Check if it flattened from 3D to 2D (1 image, 3 pixels)
         assert X_train.shape == (1, 3), f"Expected shape (1, 3), got {X_train.shape}"
@@ -78,13 +89,24 @@ def test_backpropagation_learning():
     dummy_image = np.random.rand(1, 784)
     target_label = np.array([[1.0]])
 
+    # ADDED: Create dummy validation data to satisfy the train method's requirements
+    dummy_val_image = np.random.rand(1, 784)
+    val_target_label = np.array([[0.0]])
+
     # 1. Get the baseline loss BEFORE any training
     initial_guess = model.feed_forward(dummy_image)
     initial_loss = np.mean(np.square(target_label - initial_guess))
 
     # 2. Train the network on this single image for 50 epochs
     # We use a relatively high learning rate here just to force a noticeable change quickly
-    model.train(X_train=dummy_image, y_train=target_label, epochs=50, learning_rate=0.1)
+    model.train(
+        X_train=dummy_image,
+        y_train=target_label,
+        X_val=dummy_val_image,  # <--- ADDED
+        y_val=val_target_label,  # <--- ADDED
+        epochs=50,
+        learning_rate=0.1,
+    )
 
     # 3. Get the new loss AFTER training
     final_guess = model.feed_forward(dummy_image)

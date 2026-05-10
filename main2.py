@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     print("Initializing Multi-Layer Perceptron (784 -> 128 -> 64 -> 1)...")
     model = MultiLayerPerceptron(
-        input_nodes=784, hidden_nodes_1=128, hidden_nodes_2=64, output_nodes=1
+        input_nodes=784, hidden_nodes_1=512, hidden_nodes_2=256, output_nodes=1
     )
 
     print("Starting Training Loop...")
