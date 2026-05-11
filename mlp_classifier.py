@@ -1,5 +1,3 @@
-# mlp_classifier.py outline
-
 import numpy as np
 
 

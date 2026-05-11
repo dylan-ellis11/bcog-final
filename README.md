@@ -45,3 +45,6 @@ testing_model.py is the testing file to validate the network's integrity before 
 1. test_preprocessing_normalization: Passes a dummy array to verify that 3D structures are properly flattened to 2D and normalized strictly between 0 and 1.
 2. test_feed_forward_dimensions: Pushes a dummy image through the network to assert that the output matrix shape perfectly matches the expected 1x1 probability score.
 3. test_backpropagation_learning: Feeds a dummy image through the training loop for 50 epochs. It strictly asserts that the 50th epoch's loss is lower than the 1st epoch's loss, definitively proving that the calculus and gradient descent are mathematically updating the weights in the correct direction.
+
+## Optional Tests to Run and Changes to Make:
+If interested, you can make alterations to see if your final test accuracy can improve. If you want to alter alter number of epochs, change epochs=2500 to epochs=n. Keep in mind it will result in longer compute time. If you want to try new architectures, you can change hidden_nodes_1=128, hidden_nodes_2=64 to hidden_nodes=n for each variable and see if the test accuracy improves. This could also result in longer compute time.
