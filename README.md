@@ -36,6 +36,7 @@ Data Management Utilities:
 2. shape_find.py: An inspection script that iterates through the .npz file keys to print the array names, shapes, data types, and min/max values. Useful for confirming data structures before pushing them through the network.
 
 Testing Suite:
+
 To test that the model is initializing correctly and passes the following tests run the following:
 
 python testing_model.py
