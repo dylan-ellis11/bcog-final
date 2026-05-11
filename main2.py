@@ -16,7 +16,7 @@ if __name__ == "__main__":
         "pneumoniamnist.npz"
     )
 
-    print("Initializing Multi-Layer Perceptron (784 -> 128 -> 64 -> 1)...")
+    print("Initializing Multi-Layer Perceptron")
     model = MultiLayerPerceptron(
         input_nodes=784, hidden_nodes_1=512, hidden_nodes_2=256, output_nodes=1
     )
