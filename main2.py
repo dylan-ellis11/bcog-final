@@ -24,7 +24,7 @@ if __name__ == "__main__":
     print("Starting Training Loop...")
     # Capture both histories
     train_history, val_history = model.train(
-        X_train, y_train, X_val, y_val, epochs=1200, learning_rate=0.01
+        X_train, y_train, X_val, y_val, epochs=2500, learning_rate=0.01
     )
 
     print("Generating Loss Graph...")
