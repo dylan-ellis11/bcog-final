@@ -32,8 +32,9 @@ Execution Scripts:
 2. main2.py: An alternative execution script used for hyperparameter testing. It functions identically to main.py but tests a different number of nodes for its hidden layer architecture (784 Input $\rightarrow$ 512 Hidden $\rightarrow$ 256 Hidden $\rightarrow$ 1 Output) to observe differences in learning capacity and overfitting.
 
 Data Management Utilities:
-1. data_draw.py: A utility script that utilizes the medmnist library to securely download the Pneumonia dataset and copy the resulting pneumoniamnist.npz file directly into the working directory.dataset_explorer.py: A simple diagnostic tool that loads the .npz file to calculate and print the class distribution (healthy vs. pneumonia) within the training data.
-2. shape_find.py: An inspection script that iterates through the .npz file keys to print the array names, shapes, data types, and min/max values. Useful for confirming data structures before pushing them through the network.
+1. data_draw.py: A utility script that utilizes the medmnist library to securely download the Pneumonia dataset and copy the resulting pneumoniamnist.npz file directly into the working directory.
+2. dataset_explorer.py: A simple diagnostic tool that loads the .npz file to calculate and print the class distribution (healthy vs. pneumonia) within the training data.
+3. shape_find.py: An inspection script that iterates through the .npz file keys to print the array names, shapes, data types, and min/max values. Useful for confirming data structures before pushing them through the network.
 
 Testing Suite:
 
