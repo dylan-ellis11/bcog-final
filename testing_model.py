@@ -30,9 +30,6 @@ def test_preprocessing_normalization():
     )
 
     try:
-        # 3. Pass the filepath to your function
-        # NOTE: If your function returns validation data too, you will need to
-        # unpack 6 variables here instead of 4 (e.g., X_train, y_train, X_val, y_val, X_test, y_test)
         X_train, y_train, X_val, y_val, X_test, y_test = load_and_preprocess_data(
             temp_filepath
         )
@@ -42,7 +39,6 @@ def test_preprocessing_normalization():
 
         # 5. Check if it normalized correctly
         expected_values = np.array([[0.0, 128 / 255.0, 1.0]])
-        # np.allclose handles tiny floating point differences (like 0.50196 vs 0.501)
         assert np.allclose(
             X_train, expected_values, atol=1e-3
         ), f"Normalization failed. Got {X_train}"
@@ -57,15 +53,13 @@ def test_preprocessing_normalization():
 def test_feed_forward_dimensions():
     print("Running test_feed_forward_dimensions...")
 
-    # Initialize network (784 input pixels, 2 hidden layers, 1 output class for healthy/unhealthy)
+    # Initialization
     model = MultiLayerPerceptron(
         input_nodes=784, hidden_nodes_1=64, hidden_nodes_2=32, output_nodes=1
     )
 
-    # Create a single dummy image (1 sample, 784 pixels)
+    # dummy image (1 sample, 784 pixels)
     dummy_image = np.random.rand(1, 784)
-
-    # Push it through the network
     output = model.feed_forward(dummy_image)
 
     # Assert the output is a single probability score (1 sample, 1 output)
@@ -85,20 +79,19 @@ def test_backpropagation_learning():
         input_nodes=784, hidden_nodes_1=64, hidden_nodes_2=32, output_nodes=1
     )
 
-    # Create a single dummy image and a target label (e.g., label = 1 for unhealthy)
+    # Create dummy image and a target label
     dummy_image = np.random.rand(1, 784)
     target_label = np.array([[1.0]])
 
-    # ADDED: Create dummy validation data to satisfy the train method's requirements
+    # Create dummy validation data to satisfy the train method's requirements
     dummy_val_image = np.random.rand(1, 784)
     val_target_label = np.array([[0.0]])
 
-    # 1. Get the baseline loss BEFORE any training
+    # Get the baseline loss before training
     initial_guess = model.feed_forward(dummy_image)
     initial_loss = np.mean(np.square(target_label - initial_guess))
 
-    # 2. Train the network on this single image for 50 epochs
-    # We use a relatively high learning rate here just to force a noticeable change quickly
+    # train model
     model.train(
         X_train=dummy_image,
         y_train=target_label,
@@ -108,23 +101,20 @@ def test_backpropagation_learning():
         learning_rate=0.1,
     )
 
-    # 3. Get the new loss AFTER training
+    # get loss after training
     final_guess = model.feed_forward(dummy_image)
     final_loss = np.mean(np.square(target_label - final_guess))
 
-    # 4. The absolute proof that calculus is working
     assert (
         final_loss < initial_loss
     ), f"Loss did not decrease! Initial: {initial_loss:.4f}, Final: {final_loss:.4f}"
 
-    print(
-        f" -> SUCCESS: The chain rule works. Loss decreased from {initial_loss:.4f} to {final_loss:.4f}!\n"
-    )
+    print(f"SUCCESS: Loss decreased from {initial_loss:.4f} to {final_loss:.4f}!\n")
 
 
 if __name__ == "__main__":
-    print("=== Starting MLP Architecture Tests ===\n")
+    print("Starting MLP Architecture Tests\n")
     test_preprocessing_normalization()
     test_feed_forward_dimensions()
     test_backpropagation_learning()
-    print("=== All tests passed! You are ready for MedMNIST data. ===")
+    print("All tests passed. Begin training the model with main.py.")
