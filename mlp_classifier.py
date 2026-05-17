@@ -100,7 +100,7 @@ class MultiLayerPerceptron:
         Calculates the gradient of the loss function using the chain rule.
         Adjusts the weights and biases (synaptic strengths) via gradient descent.
         """
-        m = X.shape[0]  # Number of samples in this batch
+        m = X.shape[0]  # Number of samples
 
         # FIX 2: Binary Cross-Entropy (BCE) Loss setup
         # The derivative of BCE + Sigmoid simplifies exactly to (prediction - actual)
