@@ -29,7 +29,7 @@ mlp_classifier.py is the mathematical core of the project. It contains the follo
 
 Execution Scripts:
 1. main.py: The primary execution script. It initializes an MLP with a specific node architecture (784 Input $\rightarrow$ 128 Hidden $\rightarrow$ 64 Hidden $\rightarrow$ 1 Output). It handles the full pipeline: loading data, training for 2500 epochs, plotting the training/validation loss curves side-by-side, and printing the final exam accuracy.
-2. main_alternative.py: An alternative execution script used for hyperparameter testing. It functions identically to main.py but tests a different number of nodes for its hidden layer architecture (784 Input $\rightarrow$ 512 Hidden $\rightarrow$ 256 Hidden $\rightarrow$ 1 Output) to observe differences in learning capacity and overfitting.
+2. main_alternative.py: An alternative execution script used for hyperparameter testing. It functions identically to main.py but tests a different number of nodes for its hidden layer architecture (784 Input $\rightarrow$ 256 Hidden $\rightarrow$ 128 Hidden $\rightarrow$ 1 Output) to observe differences in learning capacity and overfitting.
 
 Data Management Utilities:
 1. data_draw.py: A utility script that utilizes the medmnist library to securely download the Pneumonia dataset and copy the resulting pneumoniamnist.npz file directly into the working directory.

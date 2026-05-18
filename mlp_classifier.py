@@ -9,7 +9,7 @@ def load_and_preprocess_data(filepath):
     - Resizes to uniform pixel dimensions (28x28).
     - Flattens 2D arrays into 1D arrays (size 784).
     - Normalizes pixel values by dividing by 255.0.
-    Returns: X_train, y_train, X_test, y_test
+    Returns: X_train, y_train, X_val, y_val, X_test, y_test
     """
     data = np.load(filepath)
 
@@ -28,7 +28,7 @@ def load_and_preprocess_data(filepath):
     X_val = X_val.astype(np.float64) / 255.0
     X_test = X_test.astype(np.float64) / 255.0
 
-    # FIX 1: Reshape labels into column vectors to prevent NumPy broadcasting errors
+    # Reshape labels into column vectors to prevent NumPy broadcasting errors
     y_train = y_train.reshape(-1, 1)
     y_val = y_val.reshape(-1, 1)
     y_test = y_test.reshape(-1, 1)
@@ -102,11 +102,10 @@ class MultiLayerPerceptron:
         """
         m = X.shape[0]  # Number of samples
 
-        # FIX 2: Binary Cross-Entropy (BCE) Loss setup
-        # The derivative of BCE + Sigmoid simplifies exactly to (prediction - actual)
+        # Binary Cross-Entropy (BCE) Loss setup
         error = output_guess - y
 
-        # 1. Output Layer Gradients (No sigmoid derivative needed due to BCE cancellation)
+        # 1. Output Layer Gradients
         d_output = error
         dW3 = np.dot(self.A2.T, d_output) / m
         db3 = np.sum(d_output, axis=0, keepdims=True) / m
@@ -123,7 +122,7 @@ class MultiLayerPerceptron:
         dW1 = np.dot(self.X_input.T, d_h1) / m
         db1 = np.sum(d_h1, axis=0, keepdims=True) / m
 
-        # FIX 3: Gradient Descent Update (Subtracting the gradient to move towards the minimum)
+        # Gradient Descent - Subtracting the gradient to move towards the minimum
         self.W3 -= learning_rate * dW3
         self.b3 -= learning_rate * db3
         self.W2 -= learning_rate * dW2
