@@ -12,7 +12,7 @@ First, you need to pull the PneumoniaMNIST dataset into your local project direc
 python data_draw.py
 
 2. Verify Data and Architecture (Testing):
-Before training, it is highly recommended to run the testing suite. This ensures that the data normalizes correctly, the matrix dimensions align across all three layers, and the backpropagation calculus successfully reduces loss. To do this, run: 
+Before training, it is recommended to run the testing suite. This ensures that the data normalizes correctly, the matrix dimensions align across all three layers, and the backpropagation calculus successfully reduces loss. To do this, run: 
 
 python testing_model.py.
 
@@ -29,7 +29,7 @@ mlp_classifier.py is the mathematical core of the project. It contains the follo
 
 Execution Scripts:
 1. main.py: The primary execution script. It initializes an MLP with a specific node architecture (784 Input $\rightarrow$ 128 Hidden $\rightarrow$ 64 Hidden $\rightarrow$ 1 Output). It handles the full pipeline: loading data, training for 2500 epochs, plotting the training/validation loss curves side-by-side, and printing the final exam accuracy.
-2. main2.py: An alternative execution script used for hyperparameter testing. It functions identically to main.py but tests a different number of nodes for its hidden layer architecture (784 Input $\rightarrow$ 512 Hidden $\rightarrow$ 256 Hidden $\rightarrow$ 1 Output) to observe differences in learning capacity and overfitting.
+2. main_alternative.py: An alternative execution script used for hyperparameter testing. It functions identically to main.py but tests a different number of nodes for its hidden layer architecture (784 Input $\rightarrow$ 512 Hidden $\rightarrow$ 256 Hidden $\rightarrow$ 1 Output) to observe differences in learning capacity and overfitting.
 
 Data Management Utilities:
 1. data_draw.py: A utility script that utilizes the medmnist library to securely download the Pneumonia dataset and copy the resulting pneumoniamnist.npz file directly into the working directory.
@@ -49,4 +49,4 @@ testing_model.py is the testing file to validate the network's integrity before 
 3. test_backpropagation_learning: Feeds a dummy image through the training loop for 50 epochs. It strictly asserts that the 50th epoch's loss is lower than the 1st epoch's loss, definitively proving that the calculus and gradient descent are mathematically updating the weights in the correct direction.
 
 ## Optional Tests to Run and Changes to Make:
-If interested, you can make alterations to see if your final test accuracy can improve. If you want to alter alter number of epochs, change epochs=2500 to epochs=n. Keep in mind it will result in longer compute time. If you want to try new architectures, you can change hidden_nodes_1=128, hidden_nodes_2=64 to hidden_nodes=n for each variable and see if the test accuracy improves. This could also result in longer compute time. Finally, changing the learning_rate variable within main.py or main2.py can create possible improvements in accuracy.
+If interested, you can make alterations to see if your final test accuracy can improve. If you want to alter alter number of epochs, change epochs=2500 to epochs=n. Keep in mind it will result in longer compute time. If you want to try new architectures, you can change hidden_nodes_1=128, hidden_nodes_2=64 to hidden_nodes=n for each variable and see if the test accuracy improves. This could also result in longer compute time. Finally, changing the learning_rate variable within main.py or main_alternative.py can create possible improvements in accuracy.
